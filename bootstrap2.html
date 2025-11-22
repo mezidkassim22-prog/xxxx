@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Horizontal Scroll Layout - Bootstrap</title>
+  <title>Bootstrap2 Horizontal Scroll</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -20,6 +20,7 @@
       height: 100%;
     }
 
+    /* Header & Footer */
     .area {
       height: 20vh;
       display: flex;
@@ -27,8 +28,18 @@
       align-items: center;
       font-size: 26px;
       font-weight: 600;
+      color: white;
     }
 
+    .header {
+      background-color: #dc3545; /* Bootstrap red */
+    }
+
+    .footer {
+      background-color: #0d6efd; /* Bootstrap blue */
+    }
+
+    /* Scrollable container */
     .scroll-wrapper {
       position: relative;
       width: 100%;
@@ -38,18 +49,18 @@
       display: flex;
       overflow-x: auto;
       flex-wrap: nowrap;
-      width: 100%;
       scroll-behavior: smooth;
       padding: 10px 0;
     }
 
     .scroll-container::-webkit-scrollbar {
-      display: none;
+      display: none; /* hide scrollbar */
     }
 
+    /* Individual content boxes */
     .content-area {
-      height: 60vh;
       min-width: 300px;
+      height: 60vh;
       margin: 0 10px;
       display: flex;
       justify-content: center;
@@ -58,8 +69,16 @@
       font-weight: 600;
       flex-shrink: 0;
       border-radius: 8px;
+      color: white;
     }
 
+    .bg-warning { background-color: #ffc107 !important; color: black !important; }
+    .bg-success { background-color: #198754 !important; }
+    .bg-info { background-color: #0dcaf0 !important; color: black !important; }
+    .bg-purple { background-color: #6f42c1 !important; }
+    .bg-pink { background-color: #d63384 !important; }
+
+    /* Scroll buttons */
     .scroll-btn {
       position: absolute;
       top: 50%;
@@ -75,38 +94,34 @@
       z-index: 10;
     }
 
-    .scroll-btn-left {
-      left: 10px;
-    }
-
-    .scroll-btn-right {
-      right: 10px;
-    }
+    .scroll-btn-left { left: 10px; }
+    .scroll-btn-right { right: 10px; }
   </style>
 </head>
-
 <body class="bg-light">
 
   <!-- Header -->
-  <header class="area bg-danger text-white w-100">
+  <header class="area header w-100">
     Header
   </header>
 
-  <!-- Scrollable content with buttons -->
+  <!-- Scrollable content section -->
   <div class="scroll-wrapper my-3">
     <button class="scroll-btn scroll-btn-left" onclick="scrollLeft()">&#8249;</button>
+
     <div id="scrollContainer" class="scroll-container">
-      <div class="content-area bg-warning text-dark">Left</div>
-      <div class="content-area bg-success text-white">Center</div>
-      <div class="content-area bg-info text-dark">Right</div>
-      <div class="content-area bg-purple text-white">Extra 1</div>
-      <div class="content-area bg-pink text-white">Extra 2</div>
+      <div class="content-area bg-warning">Left</div>
+      <div class="content-area bg-success">Center</div>
+      <div class="content-area bg-info">Right</div>
+      <div class="content-area bg-purple">Extra 1</div>
+      <div class="content-area bg-pink">Extra 2</div>
     </div>
+
     <button class="scroll-btn scroll-btn-right" onclick="scrollRight()">&#8250;</button>
   </div>
 
   <!-- Footer -->
-  <footer class="area bg-primary text-white w-100">
+  <footer class="area footer w-100">
     Footer
   </footer>
 
@@ -117,10 +132,10 @@
     crossorigin="anonymous"
   ></script>
 
-  <!-- Scroll JS -->
+  <!-- Scroll buttons JS -->
   <script>
     const container = document.getElementById('scrollContainer');
-    const scrollAmount = 300; // Adjust scroll distance per click
+    const scrollAmount = 300;
 
     function scrollLeft() {
       container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
