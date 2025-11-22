@@ -3,35 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap2 Horizontal Scroll Layout</title>
+  <title>Bootstrap2 Refactored Layout</title>
 
   <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    integrity="sha384-QWTKZyjpPEjISv3WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous"
   >
 
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
+    :root {
+      --header-height: 18vh;
+      --footer-height: 18vh;
+      --scroll-box-width: 300px;
+      --scroll-box-height: 60vh;
+      --shadow-default: 0 4px 8px rgba(0,0,0,0.2);
+      --shadow-hover: 0 8px 16px rgba(0,0,0,0.3);
     }
 
-    /* Header & Footer */
-    .area {
-      height: 18vh;
+    body {
+      background-color: #f8f9fa;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header + Footer */
+    .layout-section {
+      height: var(--header-height);
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 28px;
       font-weight: 700;
       color: white;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px rgba(0,0,0,.3);
     }
 
     .header {
@@ -40,71 +48,64 @@
 
     .footer {
       background: linear-gradient(90deg, #0d6efd, #3b82f6);
+      height: var(--footer-height);
     }
 
-    /* Scrollable container */
+    /* Horizontal Scroll Section */
     .scroll-container {
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       padding: 20px 0;
+      gap: 20px;
     }
 
     .scroll-container::-webkit-scrollbar {
-      display: none; /* hides scrollbar */
+      display: none;
     }
 
-    /* Content boxes */
-    .content-area {
-      scroll-snap-align: start;
-      min-width: 300px;
-      height: 60vh;
-      margin: 0 15px;
+    /* Scroll Items */
+    .scroll-item {
+      min-width: var(--scroll-box-width);
+      height: var(--scroll-box-height);
+      border-radius: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 26px;
       font-weight: 600;
-      flex-shrink: 0;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      scroll-snap-align: start;
+      box-shadow: var(--shadow-default);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       color: white;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .content-area:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    .scroll-item:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
     }
-
-    /* Colors */
-    .bg-warning { background-color: #ffc107 !important; color: black !important; }
-    .bg-success { background-color: #198754 !important; }
-    .bg-info { background-color: #0dcaf0 !important; color: black !important; }
-    .bg-purple { background-color: #6f42c1 !important; }
-    .bg-pink { background-color: #d63384 !important; }
-
   </style>
 </head>
+
 <body>
 
   <!-- Header -->
-  <header class="area header w-100">
-    Bootstrap2 Horizontal Scroll Layout
+  <header class="layout-section header">
+    Bootstrap2 Refactored Layout
   </header>
 
-  <!-- Scrollable content section (CSS scroll snapping) -->
-  <div class="scroll-container">
-    <div class="content-area bg-warning">Left</div>
-    <div class="content-area bg-success">Center</div>
-    <div class="content-area bg-info">Right</div>
-    <div class="content-area bg-purple">Extra 1</div>
-    <div class="content-area bg-pink">Extra 2</div>
-  </div>
+  <!-- Horizontal Scroll Section -->
+  <main class="scroll-container">
+    <div class="scroll-item bg-warning text-dark">Left</div>
+    <div class="scroll-item bg-success">Center</div>
+    <div class="scroll-item bg-info text-dark">Right</div>
+    <div class="scroll-item bg-primary">Item 4</div>
+    <div class="scroll-item bg-danger">Item 5</div>
+  </main>
 
   <!-- Footer -->
-  <footer class="area footer w-100">
+  <footer class="layout-section footer">
     Footer
   </footer>
 
