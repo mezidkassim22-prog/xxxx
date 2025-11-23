@@ -3,44 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizontal Layout</title>
+    <title>Centered Floating Layout</title>
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
+        /* General styling for a clean look */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5; /* Lighter background for better "float" effect */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex; /* Enable flexbox on the body */
+            flex-direction: column; /* Stack children vertically */
+        }
+
+        /* ⭐️ NEW: Center the main content vertically and horizontally */
+        .main-content-wrapper {
+            flex-grow: 1; /* Allows this wrapper to take up available vertical space */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            padding-top: 56px; /* Offset for fixed navbar */
+            padding-bottom: 20px; /* Space at the bottom */
+        }
+
+        /* Styling for the container that holds the cards */
+        .floating-container {
+            /* Set a max width for the cards when centered */
+            max-width: 1000px; 
+            width: 90%; 
+            margin: 0 auto;
+        }
+
+        /* Custom Box Styles with Gradients and Shadows */
+        .left-box, .right-box {
+            /* ❌ REMOVED: height: 100vh; */
+            min-height: 450px; /* Give the cards a minimum height */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Deeper shadow for a more lifted look */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            padding: 3rem; /* Add generous padding inside the box */
+        }
+        
         .left-box {
-            height: 100vh;
-            background-color: #da0b37;
+            background: linear-gradient(135deg, #da0b37 0%, #ff4d6d 100%);
+            border-radius: 0.5rem 0 0 0.5rem;
         }
+
         .right-box {
-            height: 100vh;
-            background-color: #06944d;
+            background: linear-gradient(135deg, #06944d 0%, #29c786 100%);
+            border-radius: 0 0.5rem 0.5rem 0;
         }
+
+        /* Hover Effect: Subtle Scale Up and enhanced shadow */
+        .left-box:hover,
+        .right-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
         .box-text {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: clamp(2rem, 10vw, 3.5rem); /* Reduced max size for better fit */
+            font-weight: 900;
             color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        
+        .box-icon {
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Ensure no gap between the boxes in the row */
+        .row.g-0 > [class*="col-"] {
+            padding: 0;
+        }
+        
+        /* ⭐️ Adjust radius for mobile view (stacked) */
+        @media (max-width: 767.98px) {
+            .left-box {
+                border-radius: 0.5rem 0.5rem 0 0; /* Rounded top corners */
+            }
+            .right-box {
+                border-radius: 0 0 0.5rem 0.5rem; /* Rounded bottom corners */
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container-fluid p-0">
-    <div class="row g-0">
+<nav class="navbar navbar-dark bg-dark fixed-top shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">✨ Floating Card Layout</a>
+        <span class="navbar-text">
+            Centered using Flexbox
+        </span>
+    </div>
+</nav>
 
-        <!-- LEFT (horizontal) -->
-        <div class="col-6 left-box d-flex justify-content-center align-items-center">
-            <span class="box-text">LEFT</span>
+<div class="main-content-wrapper">
+    
+    <div class="container-fluid floating-container">
+        
+        <div class="row g-0">
+
+            <div class="col-12 col-md-6 left-box d-flex flex-column justify-content-center align-items-center text-center">
+                <i class="bi bi-box-fill box-icon"></i>
+                <h1 class="box-text mb-0">DESIGN</h1>
+                <p class="text-white opacity-75 mt-3">This section is for style and visual appeal, lifted off the page.</p>
+                <button class="btn btn-outline-light mt-4">View Details</button>
+            </div>
+
+            <div class="col-12 col-md-6 right-box d-flex flex-column justify-content-center align-items-center text-center">
+                <i class="bi bi-rocket-takeoff-fill box-icon"></i>
+                <h1 class="box-text mb-0">LAUNCH</h1>
+                <p class="text-white opacity-75 mt-3">This section is for action and performance, ready to go!</p>
+                <button class="btn btn-light mt-4 text-success fw-bold">Get Started</button>
+            </div>
+
         </div>
-
-        <!-- RIGHT (horizontal) -->
-        <div class="col-6 right-box d-flex justify-content-center align-items-center">
-            <span class="box-text">RIGHT</span>
-        </div>
-
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
